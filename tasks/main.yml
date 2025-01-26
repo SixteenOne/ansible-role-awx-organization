@@ -1,0 +1,10 @@
+- name: Create organization
+  awx.awx.organization:
+    controller_host: "{{ awx_controller_host }}"
+    controller_username: "{{ awx_controller_username }}"
+    controller_password: "{{ awx_controller_password }}"
+    name: "{{ item.name }}"
+    description: "{{ item.description | default(omit) }}"
+    state: "{{ item.state | default('present') }}"
+  loop: "{{ awx_organizations }}"
+  # when: awx_organizations is defined
