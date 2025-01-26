@@ -11,15 +11,16 @@ This role manages AWX organizations.
 
 ## Role Variables
 
-| Variable | Description | Default |
-|----------|-------------|---------|
-| `awx_organization_name` | Name of the organization to create/manage | None |
-| `awx_organization_description` | Description of the organization | "" |
-| `awx_organization_state` | Desired state of the organization (present/absent) | present |
-| `awx_host` | URL of the AWX/Tower instance | http://localhost |
-| `awx_username` | Username for AWX/Tower authentication | admin |
-| `awx_password` | Password for AWX/Tower authentication | password |
-| `awx_validate_certs` | Whether to validate SSL certificates | true |
+```yaml
+awx_controller_host:        # AWX host URL
+awx_controller_username:    # AWX admin username
+awx_controller_password:    # AWX admin password
+
+awx_credentials:
+  name:                     # Name of you Organization
+  description:              # Description of Organization
+  state:                    # State of Organization - defaults to present
+```
 
 ## Example Playbook of adding an Organization
 
@@ -28,12 +29,10 @@ This role manages AWX organizations.
   roles:
     - role: awx_organization
       vars:
-        awx_organization_name: "My Company"
-        awx_organization_description: "Primary organization for My Company"
-        awx_host: "https://awx.example.com"
-        awx_username: "admin"
-        awx_password: "secure_password"
-        awx_validate_certs: true
+        awx_organizations:
+          - name: SixteenOne
+            description: SixteenOne Organization
+            state: present
 ```
 
 ## License
